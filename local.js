@@ -58,6 +58,7 @@
   KEY = config.password;
 
   METHOD = config.method;
+  LOCAL_ADR = typeof config.local_addr !== "undefined" ? config.local_addr : null;
 
   timeout = Math.floor(config.timeout * 1000);
 
@@ -251,8 +252,8 @@
     });
   });
 
-  server.listen(PORT, function() {
-    return util.log("server listening at port " + PORT);
+  server.listen(PORT, LOCAL_ADR, function() {
+    return util.log(`server listening at ${LOCAL_ADR}:${PORT}`);
   });
 
   server.on("error", function(e) {
